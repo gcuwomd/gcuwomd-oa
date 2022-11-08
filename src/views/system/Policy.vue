@@ -94,9 +94,9 @@
       方披露自己的个人信息，如联络方式或者邮政地址。请您妥善保护自己的个人信息，仅在必要的情形下向他人提供。如您发现自己的个人信息泄密，尤其是本应用用户名及密码发生泄露，请您立即联络本应用客服，以便本应用采取相应措施。
     </p>
     <div class="back">
-      <button>
-        <router-link to="/">返回</router-link>
-      </button>
+      <router-link to="/">
+        <button>返回</button>
+      </router-link>
     </div>
   </div>
 </template>
@@ -117,11 +117,12 @@
     }
   }
   .back {
-    
     display: flex;
     justify-content: center;
     margin: 20px 0;
-
+    a{
+      width: 100%;
+    }
     button {
       width: 100%;
       height: 61px;
@@ -130,9 +131,7 @@
       font-size: 18px;
       background-color: #04c0ed;
       border: none;
-      a {
-        color: #fff;
-      }
+      color: #fff;
     }
   }
 }

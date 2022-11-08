@@ -1,6 +1,4 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 <template>
   <div class="container">
     <div class="ikon">
@@ -8,13 +6,13 @@
     </div>
     <div class="title">欢迎使用网信委OA系统</div>
     <div class="content">
-      <n-button class="btn-info">
-        <router-link to="/register">创建账号</router-link>
-      </n-button>
+      <router-link to="/register">
+        <n-button class="btn-info"> 创建账号 </n-button>
+      </router-link>
       <p>已有帐号？去登录吧！</p>
-      <n-button class="btn-default">
-        <router-link to="/login">登录</router-link>
-      </n-button>
+      <router-link to="/login">
+        <n-button class="btn-default"> 登录 </n-button>
+      </router-link>
     </div>
     <div class="footer">
       <div class="policy">
@@ -35,10 +33,10 @@
   flex-direction: column;
   align-items: center;
   font-weight: normal;
-  a{
+  a {
     text-decoration: none;
   }
-  .ikon{
+  .ikon {
     margin-bottom: 30px;
   }
   .title {
@@ -63,16 +61,12 @@
     .btn-info {
       background-color: #04c0ed;
       border: none;
-      a{
-        color: #fff;
-      }
+      color: #fff;
     }
     .btn-default {
       background-color: transparent;
       border: 1px solid #04c0ed;
-      a{
-        color: #04c0ed;
-      }
+      color: #04c0ed;
     }
     p {
       font-size: 12px;
@@ -97,7 +91,7 @@
         color: #000;
       }
     }
-    .pow{
+    .pow {
       font-size: 12px;
       margin-bottom: 24px;
     }
