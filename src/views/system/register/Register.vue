@@ -2,15 +2,23 @@
  * @Author: xuan
  * @LastEditors: xuan
  * @Date: 2022-11-10 13:32:32
- * @LastEditTime: 2022-11-14 11:27:03
+ * @LastEditTime: 2022-11-18 20:47:33
  * @FilePath: \gcuwomd-oa\src\views\system\register\Register.vue
  * @Description: 
 -->
 <script setup lang="ts">
-const model = ""
-const rules = ""
-const size = ""
-const generalOptions = ""
+import { FormInst, FormItemRule, useMessage } from 'naive-ui';
+import { ref } from 'vue';
+import {
+  RegisterForm,
+  RegisterFormRules,
+  clearForm,
+  handleregister,
+  orgOptions,
+  dptOptions,
+} from '../../../hooks/ui-hooks/login/register.ui.hooks';
+const message = useMessage();
+const FormRef = ref<FormInst | null>(null);
 </script>
 <template>
   <div>
@@ -22,7 +30,7 @@ const generalOptions = ""
         </div>
         <div class="head">
           <div class="return">
-            <router-link to="">
+            <router-link to="/">
               <img src="../../../assets/返回按钮.png" alt="" />
             </router-link>
           </div>
@@ -35,24 +43,42 @@ const generalOptions = ""
           </div>
         </div>
       </div>
+      <div class="footer">
+        <img src="../../../assets/底部底子.png" alt="" />
+        <div class="footword">已有帐号 ? 去登录吧 !</div>
+      </div>
       <div class="content">
-        <n-form>
-
-          
-          <n-form-item img src="../../../assets/Frame.png" alt="" label="所属组织" >
-            <n-select />
+        <n-form :model="RegisterForm" :rules="RegisterFormRules" ref="FormRef" >
+          <n-form-item  label="所属组织" path="organization" :span="12">
+            <n-select
+              placeholder="请选择组织"
+              :options="orgOptions"
+              v-model:value="RegisterForm.organization"
+            />
           </n-form-item>
-          <n-form-item label="所属部门">
-            <n-select />
-          </n-form-item >
-          <n-form-item label="学号">
-            <n-input />
-          </n-form-item >
-          <n-form-item label="联系电话">
-            <n-input />
+          <n-form-item label="所属部门" path="deparment">
+            <n-select
+              placeholder="请选择部门"
+              :options="dptOptions"
+              v-model:value="RegisterForm.department"
+            />
+          </n-form-item>
+          <n-form-item label="学号" path="uid">
+            <n-input
+              placeholder="请输入账号"
+              v-model:value="RegisterForm.uid"
+            />
+          </n-form-item>
+          <n-form-item label="联系电话" path="phone">
+            <n-input
+              placeholder="请输入联系电话"
+              v-model:value="RegisterForm.phone"
+            />
           </n-form-item>
         </n-form>
-        
+        <n-button type="info" class="button" @click="handleregister">
+          激活账号
+        </n-button>
       </div>
     </div>
   </div>
@@ -111,12 +137,41 @@ const generalOptions = ""
   font-size: 12px;
   transform: scale(0.9);
 }
-.content{
+.content {
   position: relative;
   top: 257px;
   width: 314px;
   height: 365px;
   margin: auto;
+}
+.footer {
+  position: absolute;
+  background-color: transparent;
+  bottom: 0px;
+  width: 406px;
+  height: 320px;
+}
+.inputsize {
+  width: 314px;
+  height: 48px;
+  border: 1px solid #9e9e9e;
+  border-radius: 9px;
+}
+.button {
+  width: 314px;
+  height: 62px;
+  border-radius: 50px;
+  background-color: #04c0ed;
+  margin-top: 45px;
+}
+.footword {
+  position: absolute;
+  background-color: transparent;
+  width: 140px;
+  height: 17px;
+  top: 223px;
+  transform: scale(0.8);
+  right: 143px;
 }
 
 </style>
