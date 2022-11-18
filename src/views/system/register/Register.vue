@@ -2,7 +2,7 @@
  * @Author: xuan
  * @LastEditors: xuan
  * @Date: 2022-11-10 13:32:32
- * @LastEditTime: 2022-11-18 20:47:33
+ * @LastEditTime: 2022-11-18 21:32:54
  * @FilePath: \gcuwomd-oa\src\views\system\register\Register.vue
  * @Description: 
 -->
@@ -48,9 +48,10 @@ const FormRef = ref<FormInst | null>(null);
         <div class="footword">已有帐号 ? 去登录吧 !</div>
       </div>
       <div class="content">
-        <n-form :model="RegisterForm" :rules="RegisterFormRules" ref="FormRef" >
-          <n-form-item  label="所属组织" path="organization" :span="12">
+        <n-form :model="RegisterForm" :rules="RegisterFormRules" ref="FormRef">
+          <n-form-item label="所属组织" path="organization" :span="12">
             <n-select
+              size="large"
               placeholder="请选择组织"
               :options="orgOptions"
               v-model:value="RegisterForm.organization"
@@ -58,6 +59,7 @@ const FormRef = ref<FormInst | null>(null);
           </n-form-item>
           <n-form-item label="所属部门" path="deparment">
             <n-select
+              size="large"
               placeholder="请选择部门"
               :options="dptOptions"
               v-model:value="RegisterForm.department"
@@ -65,12 +67,14 @@ const FormRef = ref<FormInst | null>(null);
           </n-form-item>
           <n-form-item label="学号" path="uid">
             <n-input
+              size="large"
               placeholder="请输入账号"
               v-model:value="RegisterForm.uid"
             />
           </n-form-item>
           <n-form-item label="联系电话" path="phone">
             <n-input
+              size="large"
               placeholder="请输入联系电话"
               v-model:value="RegisterForm.phone"
             />
@@ -162,7 +166,7 @@ const FormRef = ref<FormInst | null>(null);
   height: 62px;
   border-radius: 50px;
   background-color: #04c0ed;
-  margin-top: 45px;
+  margin-top: 35px;
 }
 .footword {
   position: absolute;
@@ -173,5 +177,4 @@ const FormRef = ref<FormInst | null>(null);
   transform: scale(0.8);
   right: 143px;
 }
-
 </style>
