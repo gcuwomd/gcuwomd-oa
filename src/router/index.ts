@@ -4,7 +4,7 @@
  * @Date: 2022-11-06 15:33:50
  * @LastEditTime: 2022-11-07 21:48:13
  * @FilePath: \gcuwomd-oa\src\router\index.ts
- * @Description: 
+ * @Description:
  */
 import { RouteRecordRaw, createRouter, createWebHashHistory } from 'vue-router';
 
@@ -12,6 +12,7 @@ const index = () => import('../views/system/Index.vue');
 const register = () => import('../views/system/register/Register.vue');
 const policy = () => import('../views/system/Policy.vue');
 const example = () => import('../views/example/Index.vue');
+const login = () => import('../views/system/login/Login.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -35,6 +36,11 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/example',
     component: example,
+  },
+  {
+    path: '/login',
+    component: login,
+    name: 'Login',
   },
 ];
 
