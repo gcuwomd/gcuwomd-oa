@@ -26,7 +26,7 @@ const message = useMessage();
             <n-icon size="20">
               <ContactCardGroup20Regular />
             </n-icon>
-            <span class="account">学号：</span>
+            <span class="account">账号：</span>
           </template>
           <n-input
             v-model:value="loginModel.uid"
@@ -68,10 +68,6 @@ const message = useMessage();
   </div>
 </template>
 <style scoped lang="scss">
-:root {
-  --n-border-hover: 1px solid #9e9e9e;
-  --n-border-focus: 1px solid #9e9e9e;
-}
 .container {
   overflow: hidden;
   width: 100vw;
@@ -229,4 +225,3 @@ const message = useMessage();
   }
 }
 </style>
-<style lang="scss"></style>
