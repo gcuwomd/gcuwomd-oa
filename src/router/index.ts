@@ -1,8 +1,8 @@
 /*
  * @Author: taozhiyaoyao
- * @LastEditors: taozhiyaoyao
+ * @LastEditors: kifor
  * @Date: 2022-11-06 15:33:50
- * @LastEditTime: 2022-11-07 21:48:13
+ * @LastEditTime: 2022-11-19 17:33:25
  * @FilePath: \gcuwomd-oa\src\router\index.ts
  * @Description:
  */
@@ -13,6 +13,7 @@ const register = () => import('../views/system/register/Register.vue');
 const policy = () => import('../views/system/Policy.vue');
 const example = () => import('../views/example/Index.vue');
 const login = () => import('../views/system/login/Login.vue');
+const repwd = () => import('../views/system/repwd/repwd.vue');
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -41,6 +42,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/login',
     component: login,
     name: 'Login',
+  },
+  {
+    path: '/repwd',
+    component: repwd,
+    name: 'repwd',
   },
 ];
 
