@@ -1,22 +1,28 @@
 <!--
  * @Author: xuan
- * @LastEditors: xuan
+ * @LastEditors: taozhiyaoyao
  * @Date: 2022-11-10 13:32:32
- * @LastEditTime: 2022-11-20 13:20:51
+ * @LastEditTime: 2022-11-21 21:51:05
  * @FilePath: \gcuwomd-oa\src\views\system\register\Register.vue
  * @Description: 
 -->
 <script setup lang="ts">
 import { FormInst, FormItemRule, useMessage } from 'naive-ui';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import {
   RegisterForm,
   RegisterFormRules,
   clearForm,
-  handleregister,
-  orgOptions,
-  dptOptions,
+  handleRegister,
+  orgList,
+  departmentList,
+  renderDepList,
+  resModal,
+  registerInfo,
+  renderUserInfo,
 } from '../../../hooks/ui-hooks/login/register.ui.hooks';
+import { Organization20Regular, ContactCard20Regular } from '@vicons/fluent';
+import { Phone } from '@vicons/tabler';
 const message = useMessage();
 const FormRef = ref<FormInst | null>(null);
 </script>
@@ -37,47 +43,81 @@ const FormRef = ref<FormInst | null>(null);
           <div class="portrait">
             <img src="../../../assets/头像.png" alt="" />
             <div class="name">
-              <p class="namesytle">姓名 : 小樱</p>
-              <p class="gendersytle">性别 : 女</p>
+              <p class="namesytle">
+                姓名 :
+                {{ registerInfo.userName ? registerInfo.userName : '小樱' }}
+              </p>
+              <p class="gendersytle">
+                性别 : {{ registerInfo.sex === 0 ? '女' : '男' }}
+              </p>
             </div>
           </div>
         </div>
       </div>
-      <div class="footer">
-        <img src="../../../assets/底部底子.png" alt="" />
-        <div class="footword">已有帐号 ? 去登录吧 !</div>
-      </div>
       <div class="content">
         <n-form :model="RegisterForm" :rules="RegisterFormRules" ref="FormRef">
-          <n-form-item label="所属组织" path="organization" :span="12">
-            <n-icon>
-              
-            </n-icon>
+          <n-form-item path="orgCode" :span="12">
+            <template #label>
+              <div class="label-container">
+                <n-icon size="22">
+                  <Organization20Regular />
+                </n-icon>
+                <span class="form-label">所属组织</span>
+              </div>
+            </template>
             <n-select
               size="large"
               placeholder="请选择组织"
-              :options="orgOptions"
-              on-update:value="orgOption"
-              v-model:value="RegisterForm.organization"
+              :options="orgList"
+              label-field="orgName"
+              value-field="orgCode"
+              @update:value="renderDepList"
+              v-model:value="RegisterForm.orgCode"
             />
           </n-form-item>
-          <n-form-item label="所属部门" path="deparment">
+          <n-form-item label="所属部门" path="depCode">
+            <template #label>
+              <div class="label-container">
+                <n-icon size="22">
+                  <img src="../../../assets/icon/form-icon/Home.svg" alt="" />
+                </n-icon>
+                <span class="form-label">所属部门</span>
+              </div>
+            </template>
             <n-select
               size="large"
               placeholder="请选择部门"
-              
-              :options="dptOptions"
-              v-model:value="RegisterForm.department"
+              label-field="depName"
+              value-field="depCode"
+              :options="departmentList"
+              v-model:value="RegisterForm.depCode"
             />
           </n-form-item>
-          <n-form-item label="学号" path="uid">
+          <n-form-item path="uid">
+            <template #label>
+              <div class="label-container">
+                <n-icon size="22">
+                  <ContactCard20Regular />
+                </n-icon>
+                <span class="form-label">学号</span>
+              </div>
+            </template>
             <n-input
               size="large"
               placeholder="请输入账号"
               v-model:value="RegisterForm.uid"
+              @blur="renderUserInfo(message)"
             />
           </n-form-item>
           <n-form-item label="联系电话" path="phone">
+            <template #label>
+              <div class="label-container">
+                <n-icon size="22">
+                  <Phone />
+                </n-icon>
+                <span class="form-label">联系电话</span>
+              </div>
+            </template>
             <n-input
               size="large"
               placeholder="请输入联系电话"
@@ -85,14 +125,29 @@ const FormRef = ref<FormInst | null>(null);
             />
           </n-form-item>
         </n-form>
-        <n-button type="info" class="button" @click="handleregister(FormRef,message)">
+        <n-button
+          type="info"
+          class="button"
+          @click="handleRegister(FormRef as FormInst, message)"
+        >
           激活账号
         </n-button>
       </div>
+      <div class="footer">
+        <img src="../../../assets/底部底子.png" alt="" />
+        <div class="footword">已有帐号 ? 去登录吧 !</div>
+      </div>
     </div>
   </div>
+  <n-modal v-model:show="resModal">
+    <n-card class="res-card">
+      <img src="../../../assets/haha.png" alt="" />
+      <p calss="res-text">账号激活成功</p>
+      <p>正在自动登录中……</p>
+    </n-card>
+  </n-modal>
 </template>
-<style scoped>
+<style scoped lang="scss">
 .contaiter {
   font-weight: normal;
   font-family: 'Abhaya Libre ExtraBold';
@@ -152,6 +207,18 @@ const FormRef = ref<FormInst | null>(null);
   width: 314px;
   height: 365px;
   margin: auto;
+  .label-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    .form-label {
+      line-height: 25px;
+      color: #000;
+      font-weight: 600;
+      font-size: 16px;
+      font-family: 'Abhaya Libre SemiBold';
+    }
+  }
 }
 .footer {
   position: absolute;
@@ -159,6 +226,7 @@ const FormRef = ref<FormInst | null>(null);
   bottom: 0px;
   width: 406px;
   height: 320px;
+  z-index: -1;
 }
 .inputsize {
   width: 314px;
@@ -181,5 +249,22 @@ const FormRef = ref<FormInst | null>(null);
   top: 223px;
   transform: scale(0.8);
   right: 143px;
+}
+
+.res-card {
+  width: 314px;
+  height: 244px;
+  border-radius: 12px;
+  :deep(.n-card__content) {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  p:not(:last-child) {
+    margin: 17px 0 11px 0;
+  }
 }
 </style>
