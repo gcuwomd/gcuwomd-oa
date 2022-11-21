@@ -1,26 +1,10 @@
 /*
  * @Author: xuan
- * @LastEditors: xuan
- * @Date: 2022-11-10 13:32:32
- * @LastEditTime: 2022-11-18 14:49:43
- * @FilePath: \gcuwomd-oa\src\hooks\ui-hooks\example\example.ui.hooks.ts
- * @Description: 
- */
-/*
- * @Author: xuan
- * @LastEditors: xuan
- * @Date: 2022-11-10 13:32:32
- * @LastEditTime: 2022-11-16 20:55:27
- * @FilePath: \gcuwomd-oa\src\hooks\ui-hooks\example\example.ui.hooks.ts
- * @Description: 
- */
-/*
- * @Author: taozhiyaoyao
  * @LastEditors: taozhiyaoyao
- * @Date: 2022-11-07 21:18:36
- * @LastEditTime: 2022-11-08 11:53:02
+ * @Date: 2022-11-10 13:32:32
+ * @LastEditTime: 2022-11-21 17:36:38
  * @FilePath: \gcuwomd-oa\src\hooks\ui-hooks\example\example.ui.hooks.ts
- * @Description:
+ * @Description: 
  */
 import { reactive, ref } from 'vue';
 import { FormInst, MessageApi } from 'naive-ui';
