@@ -2,7 +2,7 @@
  * @Author: xuan
  * @LastEditors: xuan
  * @Date: 2022-11-16 23:17:38
- * @LastEditTime: 2022-11-18 14:43:15
+ * @LastEditTime: 2022-11-21 09:35:54
  * @FilePath: \gcuwomd-oa\src\api\login\Register.api.ts
  * @Description: 
  */
@@ -20,3 +20,9 @@ export const registerApi = (
         baseURL
     })
 };
+export const regirteroptions = (
+    geturl:string,
+    // getdata:string
+):Promise<AxiosResponse> =>{
+    return baseAxios.get(geturl,{baseURL})
+}

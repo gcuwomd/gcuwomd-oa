@@ -1,24 +1,39 @@
-import { reactive, ref } from 'vue';
+/*
+ * @Author: xuan
+ * @LastEditors: xuan
+ * @Date: 2022-11-16 17:26:12
+ * @LastEditTime: 2022-11-21 14:42:44
+ * @FilePath: \gcuwomd-oa\src\hooks\ui-hooks\login\register.ui.hooks.ts
+ * @Description:
+ */
+import { onMounted, reactive, ref } from 'vue';
 import { FormInst, MessageApi } from 'naive-ui';
-import { Iregister } from '../../../types/register';
-import { register } from '../../logic-hooks/login/register.logic.hooks';
+import { Ioptions, Iregister } from '../../../types/register';
+import {
+  register,
+  registerget,
+} from '../../logic-hooks/login/register.logic.hooks';
 import { Value } from 'sass';
 
-export const orgOptions = [
-  {
-    label: 'wxw',
-    value: 'wxw',
-  },
-  {
-    label: '111',
-    value: '111',
-  },
-  {
-    label: '222',
-    value: '222',
-  },
+export const org: any = ref<object>({
+  label: null,
+  value: null,
+});
+export const dpt = ref<object>();
 
-];
+export const orgOptions = 
+  registerget().then((res:any) => {
+    console.log(res.data);
+    org.value = res.data.result.map((item: { orgName: any; orgCode: any }) => ({
+      label: item.orgName,
+      value: item.orgCode,
+    }));
+    console.log(org.value);
+    
+  
+  });
+
+
 
 export const dptOptions = [
   {
@@ -75,8 +90,8 @@ export const clearForm = (): void => {
 };
 
 export const handleregister = (ref: FormInst, message: MessageApi): void => {
-  ref?.validate(async (error) => {
-    if (!error) {
+  ref?.validate(async (errors) => {
+    if (!errors) {
       register(RegisterForm).then(() => {
         message.success('注册成功');
       });

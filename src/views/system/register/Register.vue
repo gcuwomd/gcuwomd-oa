@@ -2,7 +2,7 @@
  * @Author: xuan
  * @LastEditors: xuan
  * @Date: 2022-11-10 13:32:32
- * @LastEditTime: 2022-11-18 21:32:54
+ * @LastEditTime: 2022-11-20 13:20:51
  * @FilePath: \gcuwomd-oa\src\views\system\register\Register.vue
  * @Description: 
 -->
@@ -50,10 +50,14 @@ const FormRef = ref<FormInst | null>(null);
       <div class="content">
         <n-form :model="RegisterForm" :rules="RegisterFormRules" ref="FormRef">
           <n-form-item label="所属组织" path="organization" :span="12">
+            <n-icon>
+              
+            </n-icon>
             <n-select
               size="large"
               placeholder="请选择组织"
               :options="orgOptions"
+              on-update:value="orgOption"
               v-model:value="RegisterForm.organization"
             />
           </n-form-item>
@@ -61,6 +65,7 @@ const FormRef = ref<FormInst | null>(null);
             <n-select
               size="large"
               placeholder="请选择部门"
+              
               :options="dptOptions"
               v-model:value="RegisterForm.department"
             />
@@ -80,7 +85,7 @@ const FormRef = ref<FormInst | null>(null);
             />
           </n-form-item>
         </n-form>
-        <n-button type="info" class="button" @click="handleregister">
+        <n-button type="info" class="button" @click="handleregister(FormRef,message)">
           激活账号
         </n-button>
       </div>
