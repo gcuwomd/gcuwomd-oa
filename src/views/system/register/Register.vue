@@ -2,7 +2,7 @@
  * @Author: xuan
  * @LastEditors: taozhiyaoyao
  * @Date: 2022-11-10 13:32:32
- * @LastEditTime: 2022-11-21 21:51:05
+ * @LastEditTime: 2022-11-22 17:01:15
  * @FilePath: \gcuwomd-oa\src\views\system\register\Register.vue
  * @Description: 
 -->
@@ -73,7 +73,11 @@ const FormRef = ref<FormInst | null>(null);
               value-field="orgCode"
               @update:value="renderDepList"
               v-model:value="RegisterForm.orgCode"
-            />
+            >
+              <template #arrow>
+                <div class="select-arrow"></div>
+              </template>
+            </n-select>
           </n-form-item>
           <n-form-item label="所属部门" path="depCode">
             <template #label>
@@ -91,7 +95,11 @@ const FormRef = ref<FormInst | null>(null);
               value-field="depCode"
               :options="departmentList"
               v-model:value="RegisterForm.depCode"
-            />
+            >
+              <template #arrow>
+                <div class="select-arrow"></div>
+              </template>
+            </n-select>
           </n-form-item>
           <n-form-item path="uid">
             <template #label>
@@ -152,13 +160,10 @@ const FormRef = ref<FormInst | null>(null);
   font-weight: normal;
   font-family: 'Abhaya Libre ExtraBold';
 }
-/* .header {
 
-} */
 .headbase {
   position: absolute;
   right: 0px;
-  /* display: inline-block; */
   width: 233px;
   height: 232px;
 
@@ -216,8 +221,24 @@ const FormRef = ref<FormInst | null>(null);
       color: #000;
       font-weight: 600;
       font-size: 16px;
-      font-family: 'Abhaya Libre SemiBold';
+
     }
+  }
+  .n-input {
+    border-radius: 9px;
+  }
+  :deep(.n-base-selection){
+    border-radius: 9px;
+  }
+  .select-arrow {
+    position: absolute;
+    top: 5px;
+    width: 0px;
+    height: 0px;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #9e9e9e;
+    border-left: 5px solid transparent;
+    border-bottom: 5px solid transparent;
   }
 }
 .footer {
