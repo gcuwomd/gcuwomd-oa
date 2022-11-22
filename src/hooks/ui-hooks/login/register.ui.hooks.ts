@@ -2,7 +2,7 @@
  * @Author: xuan
  * @LastEditors: taozhiyaoyao
  * @Date: 2022-11-16 17:26:12
- * @LastEditTime: 2022-11-21 21:49:54
+ * @LastEditTime: 2022-11-22 17:13:32
  * @FilePath: \gcuwomd-oa\src\hooks\ui-hooks\login\register.ui.hooks.ts
  * @Description:
  */
@@ -100,5 +100,7 @@ export const registerInfo: IRegisterInfo = reactive({
 });
 
 export const renderUserInfo = (message: MessageApi): void => {
-  loadUserInfo(RegisterForm.uid as string, registerInfo, message);
+  if (RegisterForm.uid.length > 0) {
+    loadUserInfo(RegisterForm.uid as string, registerInfo, message);
+  }
 };
